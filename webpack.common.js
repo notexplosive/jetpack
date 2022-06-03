@@ -18,7 +18,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "Pixi JS",
+      title: "NotExplosive",
+      favicon: "./favicon.png",
     }),
     new CopyPlugin({
       patterns: [{ from: "src/assets", to: "assets" }],
