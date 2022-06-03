@@ -1,7 +1,6 @@
 import * as PIXI from "pixi.js";
 import { PrimitiveRenderer } from "./limbo/render/primitive";
-import { Rectangle, Graphics } from 'pixi.js';
-import { Vector2 } from "./limbo/data/vector2";
+import { Rectangle, Graphics, IPointData } from 'pixi.js';
 
 if (process.env.NODE_ENV !== "production") {
   console.log("💻🤖 DEVELOPMENT BUILD DETECTED 🤖💻");
@@ -29,6 +28,6 @@ primitiveRenderer.rectangle(filled, new Rectangle(500, 500, 50, 50), { width: 1,
 
 var lineStyle = { color: 0xFF0000, width: 1, join: PIXI.LINE_JOIN.ROUND }
 
-primitiveRenderer.line(new Vector2(300, 300), new Vector2(500, 200), lineStyle)
+primitiveRenderer.line(new PIXI.Point(300, 300), new PIXI.Point(500, 200), lineStyle)
 
-primitiveRenderer.circle(filled, new Vector2(200, 200), 50, lineStyle);
+primitiveRenderer.circle(filled, new PIXI.Point(200, 200), 50, lineStyle);
