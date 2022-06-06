@@ -1,33 +1,28 @@
 import * as PIXI from "pixi.js";
-import { PrimitiveRenderer } from "./limbo/render/primitive";
-import { Rectangle, Graphics, IPointData } from 'pixi.js';
+import { Game } from "./limbo/data/game";
 
-if (process.env.NODE_ENV !== "production") {
-  console.log("💻🤖 DEVELOPMENT BUILD DETECTED 🤖💻");
-}
-
+// Setup DOM
 document.body.style.margin = "0";
 document.body.tabIndex = 1;
 document.body.style.background = "rgb(0, 0, 50)";
 
+// Setup App
 let app = new PIXI.Application({
   width: 800,
   height: 600,
   backgroundColor: 0x111111,
 });
 
+var isDevBuild = false;
+if (process.env.NODE_ENV !== "production") {
+  console.log("💻🤖 DEVELOPMENT BUILD DETECTED 🤖💻");
+}
+
 document.body.appendChild(app.view);
 
-var primitiveRenderer = new PrimitiveRenderer(app.stage);
+// Setup Game
+const localGame = new Game(app, isDevBuild);
 
-var filled = false;
+app.ticker.add((dt) => localGame.update(dt));
 
-primitiveRenderer.rectangle(filled, new Rectangle(100, 100, 50, 50), { width: 1, color: 0xFFAAFF });
-
-primitiveRenderer.rectangle(filled, new Rectangle(500, 500, 50, 50), { width: 1, color: 0xFFFFAA });
-
-var lineStyle = { color: 0xFF0000, width: 1, join: PIXI.LINE_JOIN.ROUND }
-
-primitiveRenderer.line(new PIXI.Point(300, 300), new PIXI.Point(500, 200), lineStyle)
-
-primitiveRenderer.circle(filled, new PIXI.Point(200, 200), 50, lineStyle);
+export function game(): Game { return localGame; }
