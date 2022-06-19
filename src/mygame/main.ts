@@ -1,4 +1,4 @@
-import { Container, Point, Rectangle } from 'pixi.js';
+import { Container, Point, Rectangle, Text, TextStyle } from 'pixi.js';
 import { game } from "../index";
 import { PrimitiveRenderer } from '../limbo/render/primitive';
 
@@ -26,4 +26,8 @@ export function main() {
     primitiveRenderer.line(new Point(300, 300), new Point(500, 200), lineStyle)
 
     primitiveRenderer.circle(filled, new Point(200, 200), 50, lineStyle);
+
+    let text = new Text("Hello world", { fontFamily: "Roboto", fill: 0xffffff })
+
+    game.app.stage.addChild(text)
 }

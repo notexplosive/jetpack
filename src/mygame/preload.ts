@@ -6,7 +6,7 @@ export function preload() {
     prepareLoad(AssetLoader.Sound, "ouch", "ouch.ogg")
     WebFont.load({
         google: {
-            families: ['Concert One']
+            families: ['Roboto']
         }
     });
 }
