@@ -1,5 +1,5 @@
 import { Container, Point, Rectangle, Text, TextStyle } from 'pixi.js';
-import { game } from "../index";
+import { game } from "../limbo/index";
 import { CirclePrimitive, OmniPrimitive } from '../limbo/render/primitive';
 
 

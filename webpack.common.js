@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.ts",
+  entry: "./src/limbo/index.ts",
   module: {
     rules: [
       {
