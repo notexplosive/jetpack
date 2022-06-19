@@ -1,6 +1,6 @@
 import { Container, Point, Rectangle, Text, TextStyle } from 'pixi.js';
 import { game } from "../index";
-import { PrimitiveRenderer } from '../limbo/render/primitive';
+import { CirclePrimitive, OmniPrimitive } from '../limbo/render/primitive';
 
 
 // game().updaters.push(new Updater((dt: number) => { console.log(dt) }));
@@ -10,10 +10,10 @@ export function main() {
     plantRoot.x = 300;
     plantRoot.y = 200;
 
-    var plantRenderer = new PrimitiveRenderer(plantRoot);
+    var plantRenderer = new OmniPrimitive(plantRoot);
     plantRenderer.circle(true, new Point(0, 0), 25, { color: 0x00ff00 })
 
-    var primitiveRenderer = new PrimitiveRenderer(game.app.stage);
+    var primitiveRenderer = new OmniPrimitive(game.app.stage);
 
     var filled = false;
 
@@ -30,4 +30,14 @@ export function main() {
     let text = new Text("Hello world", { fontFamily: "Roboto", fill: 0xffffff })
 
     game.app.stage.addChild(text)
+
+
+    let circle = new CirclePrimitive(true, 10, { color: 0xff0000 })
+    circle.position.set(50, 50)
+
+    game.world.addChild(circle)
+}
+
+export function update(dt: number) {
+
 }

@@ -1,7 +1,7 @@
 import * as PIXI from "pixi.js";
 import { Game } from "./limbo/data/game";
 import { preload } from "./mygame/preload"
-import { main } from "./mygame/main"
+import { main, update } from "./mygame/main"
 import { finishLoad } from './limbo/core/assets';
 
 // Setup DOM
@@ -25,9 +25,17 @@ if (process.env.NODE_ENV !== "production") {
 document.body.appendChild(app.view);
 
 export const game = new Game(app, { width: app.screen.width, height: app.screen.height }, isDevBuild);
+
+function coreUpdateLoop(dt: number) {
+  game.app.stage.interactive = false
+  game.app.stage.buttonMode = false
+
+  update(dt)
+}
+
 app.ticker.add(() => {
   let dt = app.ticker.elapsedMS / 1000
-  game.update(dt)
+  coreUpdateLoop(dt)
 });
 
 preload()
