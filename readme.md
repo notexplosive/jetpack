@@ -17,6 +17,8 @@ This template gives you the following:
 
 To run this template you'll need the latest version of Node (last confirmed working versions are `npm 8.12.1` and `node 16.15.1`).
 
+### How to Make Games With It
+
 - Click the green `Use This Template` above (must be logged into GitHub for this to show up)
 - Walk through the flow of creating a repo.
 - Run `npm install`
@@ -29,3 +31,24 @@ To run this template you'll need the latest version of Node (last confirmed work
 - Start writing code...
   - If using limbo: `src/main.ts`
   - If not: `src/index.ts`
+
+### How to Deploy It
+
+You can deploy manually with the following steps
+
+- Run `npm run build`
+  - This will populate a `dist` folder
+- Put the contents of `dist` into a zip
+  - It has to be the _contents_ of `dist`, not dist itself, for example index.html must be at `mygame.zip/index.html` **_NOT_** `mygame.zip/dist/index.html`
+- This resulting zip folder can be uploaded to itch.io, newgrounds, or any other HTML5 game host
+
+If you want to deploy to itch.io specifically, there's an even easier way that doesn't require creating a zip folder and has overall faster upload speed because it's aware of the file delta.
+
+- Install and setup [butler](https://itch.io/docs/butler/)
+- Run `npm run build`
+- `cd dist`
+- `butler push my-user-name/my-game-name:my-channel-name`
+  - Where `my-user-name` is your itch url e.g `notexplosive.itch.io` -> username is `notexplosive`
+  - Where `my-game-name` is the itch url to your game e.g `notexplosive.itch.io/roots` -> game name is `roots`
+  - Where `my-channel-name` is a unique name for the "channel" you want to upload to. You should probably call this `web` or `html5` and call it a day.
+  - Full sample command: `butler push notexplosive/roots:web`
