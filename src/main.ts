@@ -1,6 +1,6 @@
 import { Circle, Container, Point, Rectangle, Text, TextStyle } from 'pixi.js';
-import { game } from "../limbo/index";
-import { CirclePrimitive, OmniPrimitive, LinePrimitive, RectanglePrimitive } from '../limbo/render/primitive';
+import { game } from "./limbo/index";
+import { CirclePrimitive, OmniPrimitive, LinePrimitive, RectanglePrimitive } from './limbo/render/primitive';
 
 
 let circle = new CirclePrimitive(true, 10, {})
