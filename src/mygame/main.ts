@@ -1,43 +1,42 @@
-import { Container, Point, Rectangle, Text, TextStyle } from 'pixi.js';
+import { Circle, Container, Point, Rectangle, Text, TextStyle } from 'pixi.js';
 import { game } from "../limbo/index";
-import { CirclePrimitive, OmniPrimitive } from '../limbo/render/primitive';
+import { CirclePrimitive, OmniPrimitive, LinePrimitive, RectanglePrimitive } from '../limbo/render/primitive';
 
 
-// game().updaters.push(new Updater((dt: number) => { console.log(dt) }));
+let circle = new CirclePrimitive(true, 10, {})
+circle.position.set(50, 50)
+
+let line = new LinePrimitive(new Point(0, 0), new Point(122, 122), {})
+let childCircle = new CirclePrimitive(false, 15, {})
+let rectChild = new RectanglePrimitive(false, 20, 20, {})
 
 export function main() {
     const plantRoot = game.world.addChild(new Container());
     plantRoot.x = 300;
     plantRoot.y = 200;
 
-    var plantRenderer = new OmniPrimitive(plantRoot);
-    plantRenderer.circle(true, new Point(0, 0), 25, { color: 0x00ff00 })
-
-    var primitiveRenderer = new OmniPrimitive(game.app.stage);
-
-    var filled = false;
-
-    primitiveRenderer.rectangle(filled, new Rectangle(100, 100, 50, 50), { width: 1, color: 0xFFAAFF });
-
-    primitiveRenderer.rectangle(filled, new Rectangle(500, 500, 50, 50), { width: 1, color: 0xFFFFAA });
-
-    var lineStyle = { color: 0xFF0000, width: 1 }
-
-    primitiveRenderer.line(new Point(300, 300), new Point(500, 200), lineStyle)
-
-    primitiveRenderer.circle(filled, new Point(200, 200), 50, lineStyle);
-
     let text = new Text("Hello world", { fontFamily: "Roboto", fill: 0xffffff })
 
     game.app.stage.addChild(text)
 
-
-    let circle = new CirclePrimitive(true, 10, { color: 0xff0000 })
-    circle.position.set(50, 50)
-
     game.world.addChild(circle)
+    circle.addChild(line)
+
+    line.addChild(childCircle)
+    childCircle.position = line.end
+
+    line.addChild(rectChild)
+
+    rectChild.offset = new Point(10, 10)
+
+    rectChild.position = new Point(200, 0)
 }
 
+let totalTime = 0
 export function update(dt: number) {
+    totalTime += dt * 60
 
+    circle.x = Math.sin(totalTime / 100) * 100
+
+    circle.rotation += dt
 }
